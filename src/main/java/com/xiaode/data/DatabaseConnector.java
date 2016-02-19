@@ -7,9 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+//import net.sf.json.JSONArray;
+//import net.sf.json.JSONException;
+//import net.sf.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 public class DatabaseConnector {
 	Connection conn = null;
@@ -173,8 +176,10 @@ public class DatabaseConnector {
 				json.accumulate("age", rs.getInt("age"));
 				json.accumulate("comment", rs.getString("comment"));
 				json.accumulate("avatar", rs.getInt("avatar"));
-				jarray.add(json);
-				json.clear();
+				jarray.put(json);
+				json = new JSONObject();
+				//jarray.add(json);
+
 			}
 			rs = statement
 					.executeQuery("select friendid,nickname,ip,isAliveFlag,birthday,gender,age,comment,avatar from Info,Friendlist where friendlistid='"
@@ -192,8 +197,10 @@ public class DatabaseConnector {
 				json.accumulate("age", rs.getInt("age"));
 				json.accumulate("comment", rs.getString("comment"));
 				json.accumulate("avatar", rs.getInt("avatar"));
-				jarray.add(json);
-				json.clear();
+				jarray.put(json);
+				json = new JSONObject();
+//				jarray.add(json);
+//				json.clear();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -293,8 +300,10 @@ public class DatabaseConnector {
 					.executeQuery("select id from info where isAliveFlag = 1");
 			while (rs.next()) {
 				json.accumulate("username", rs.getString("id"));
-				jsonArray.add(json);
-				json.clear();
+				jsonArray.put(json);
+				json = new JSONObject();
+				//jsonArray.add(json);
+				//json.clear();
 			}
 		} catch (SQLException e) {
 

@@ -6,9 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Vector;
+
 import com.xiaode.data.DatabaseConnector;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MessageThread extends Thread {
 	/**
@@ -115,8 +116,7 @@ public class MessageThread extends Thread {
 		int flag = -1;
 		if (msg != null) {
 			try {
-				json = new JSONObject();
-				json = JSONObject.fromObject(msg);
+				json = new JSONObject(msg);
 				System.out.println("RCV:" + json);
 				String tempString = json.getString("Flags");
 				flag = Integer.parseInt(tempString);
